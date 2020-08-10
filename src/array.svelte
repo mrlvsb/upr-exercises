@@ -97,7 +97,7 @@ console.log('f');
 	<tr>
     <td>values</td>
 		{#each array as value, i (value)}
-      <td class="values" class:current={i == current} class:processed={i < current} class:highlight={highlight.indexOf(i) > -1}
+      <td class="values index-{i}" class:current={i == current} class:processed={i < current} class:highlight={highlight.indexOf(i) > -1}
         in:receive="{{key: value}}" out:send="{{key: value}}" animate:flip
       >{value}</td>
 		{/each}
