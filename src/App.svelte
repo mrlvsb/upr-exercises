@@ -1,6 +1,8 @@
 
 <script>
   import Sum from './sum.svelte';
+  import Min from './min.svelte';
+  import Reverse from './reverse.svelte';
 </script>
 
 # Pole (array)
@@ -11,5 +13,8 @@ int suma(int *pole, int len);
 ```
 
 <Sum array={[10, 20, 30, 40]}/>
-<Sum array={[-10, -20, -30, 40]}/>
+<hr />
+<Min array={[10, 5, 30, 2]}/>
+<hr />
+<Reverse array={[10, 5, 30, 2]}/>
 
