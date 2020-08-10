@@ -16,5 +16,5 @@ int suma(int *pole, int len);
 <hr />
 <Min array={[10, 5, 30, 2]}/>
 <hr />
-<Reverse array={[10, 5, 30, 2]}/>
+<Reverse array={[1, 2, 3, 4]}/>
 
