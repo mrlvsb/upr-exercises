@@ -23,6 +23,16 @@
 </script>
 
 <State {state} {next} recover={(s) => state = s}>
-  <Array array={state.array} current={state.i} />
+  <div style="display: flex">
+    <div>
+      <Array array={state.array} current={state.i} />
+    </div>
+    <div>
+    {#if state.i + 1 >= state.array.length / 2}
+    Konec v půlce pole ({state.array.length / 2}), jinak bychom prohodili prvky zpět.
+
+    {/if}
+    </div>
+  </div>
 </State>
 
