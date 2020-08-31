@@ -4,26 +4,11 @@
 	<meta charset='utf-8'>
 	<meta name='viewport' content='width=device-width,initial-scale=1'>
 
-	<title>Svelte app</title>
-
-<style>
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-    marker-end: url(#head);
-  }
-}
-
-svg.overlay path {
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: dash 1s linear forwards;
-}
-</style>
+	<title>UPR</title>
 
 	<script defer src='build/bundle.js'></script>
 </head>
-
 <body>
+  <upr-all />
 </body>
 </html>

@@ -28,7 +28,7 @@ $: {
     }
 
     if(typeof dst === 'string' || dst instanceof String) {
-      dst = container.querySelector(dst); 
+      dst = container.querySelector(dst);
     }
 
     svg = container.querySelector('svg.overlay');
@@ -71,6 +71,20 @@ $: {
 }
 </script>
 
+<style>
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+    marker-end: url(#head);
+  }
+}
+
+:global(svg.overlay path) {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 1s linear forwards;
+}
+</style>
 
 <span bind:this={child}>
 <slot></slot>
