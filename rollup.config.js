@@ -20,26 +20,7 @@ export default {
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('public/build/bundle.css');
-			},
       preprocess: mdsvex({extension: '.svelte'})
-
-      /*
-      preprocess: {
-        markup: function({content}) {
-          return;
-          const exec = require("child_process").execSync;
-          let result = exec("pandoc -f markdown+raw_html", {input: content}).toString('utf8');
-
-
-          return {
-            "code": result,
-          };
-        }
-      },*/
 		}),
 
 		// If you have external dependencies installed from
