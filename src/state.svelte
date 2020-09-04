@@ -5,6 +5,7 @@
     cursor: pointer;
     font-size: 13px;
     opacity: 0.8;
+    outline: none;
   }
 
   button:hover {

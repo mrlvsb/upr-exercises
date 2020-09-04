@@ -8,6 +8,7 @@ td {
   width: 30px;
   height: 30px;
   text-align: center;
+  padding: 0;
 }
 
 td.active {

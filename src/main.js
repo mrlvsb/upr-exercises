@@ -22,5 +22,5 @@ registerAnimation('array-min', require('./min.svelte'));
 registerAnimation('array-reverse', require('./reverse.svelte'));
 registerAnimation('array-sum', require('./sum.svelte'));
 
-registerAnimation('array-matrix', require('./matrix.svelte'));
-registerAnimation('array-matrix-mul', require('./matrix_mul.svelte'));
+registerAnimation('matrix', require('./matrix.svelte'));
+registerAnimation('matrix-mul', require('./matrix_mul.svelte'));

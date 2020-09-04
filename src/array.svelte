@@ -4,6 +4,8 @@
 	}
   td {
     text-align: center;
+    padding: 0;
+    border: 0;
   }
 
 	.indexes {
