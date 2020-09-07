@@ -45,7 +45,24 @@ function registerAnimation(elementName, cls) {
 }
 registerAnimation('all', require('./App.svelte'));
 registerAnimation('arrow', require('./arrow.svelte'));
-registerAnimation('container', require('./container.svelte'));
+customElements.define('upr-container', class extends HTMLElement {
+  connectedCallback() {
+    this.style.position = 'relative';
+    this.classList.add('animation');
+    this.innerHTML = `
+  <svg xmlns="http://www.w3.org/2000/svg" class="overlay" style="position: absolute; top: 0; left: 0; z-index: 2; width: -moz-fit-content; width: fit-content; height: 100%; pointer-events: none">
+    <defs>
+      <marker id="head" viewBox="0 0 10 10" refX="5" refY="5"
+        markerWidth="6" markerHeight="6"
+        orient="auto-start-reverse">
+        <path d="M 0 0 L 10 5 L 0 10 z" />
+      </marker>
+    </defs>
+  </svg>
+  `;
+  }
+});
+
 
 registerAnimation('array', require('./array.svelte'));
 registerAnimation('array-min', require('./min.svelte'));
