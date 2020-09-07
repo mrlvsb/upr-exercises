@@ -1,7 +1,7 @@
 <style>
 	table {
 		border-collapse: collapse;
-   margin: 0;
+    margin: 0;
 	}
   td {
     text-align: center;
@@ -25,7 +25,7 @@
 		position: relative;
 		left: 0px;
 	}
-	
+
 	.current {
 		background: #f9f96e;
 		font-weight: bold;
@@ -51,7 +51,7 @@
   import { flip } from 'svelte/animate';
   import { plural } from './utils.js';
 
-  export let array;
+  export let array = [];
   export let current;
   export let highlight = [];
   let tds = [];
