@@ -44,7 +44,7 @@ function registerAnimation(elementName, cls) {
   })
 }
 registerAnimation('all', require('./App.svelte'));
-registerAnimation('arrow', require('./arrow.svelte'));
+customElements.define('upr-arrow', require('./arrow.js'));
 customElements.define('upr-container', class extends HTMLElement {
   connectedCallback() {
     this.style.position = 'relative';

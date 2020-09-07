@@ -1,7 +1,6 @@
 <script>
 import Matrix from './matrix.svelte'
 import State from './state.svelte'
-import Arrow from './arrow.svelte'
 
 export let a;
 export let b;
