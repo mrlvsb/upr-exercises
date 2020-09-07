@@ -2,8 +2,9 @@
   import Array from './array.svelte'
   import State from './state.svelte'
   import Arrow from './arrow.svelte'
+  import Code from './Code.svelte'
   import { onMount } from 'svelte';
-  
+
   export let array;
 
   let src;
@@ -43,10 +44,10 @@
       <div>
         Před průchodem pole si nastavíme minimum a index <Arrow dst={svg && svg.querySelector('.index-0')}><strong bind:this={src}>nultého</strong></Arrow> prvku.
 
-  ```c
+<Code>
   int min = array[0];
   int min_index = 0;
-  ```
+</Code>
       </div>
       {:else if state.i == 3}
       Našli jsme nové minimum s hodnotou <strong>{state.min}</strong> na indexu <Arrow dst={svg && svg.querySelector('.index-3')}><strong>{state.min_index}</strong></Arrow>
