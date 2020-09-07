@@ -1,6 +1,7 @@
 <style>
 table {
   border-collapse: collapse;
+  margin: 0;
 }
 td {
   border: 1px solid black;

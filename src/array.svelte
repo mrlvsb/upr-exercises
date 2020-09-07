@@ -1,6 +1,7 @@
 <style>
 	table {
 		border-collapse: collapse;
+   margin: 0;
 	}
   td {
     text-align: center;
@@ -48,14 +49,12 @@
 <script>
   import { onMount } from 'svelte';
   import { flip } from 'svelte/animate';
+  import { plural } from './utils.js';
+
   export let array;
   export let current;
   export let highlight = [];
   let tds = [];
-
-  onMount(() => {
-    console.log(tds[0].offsetLeft)
-  });
 
   import { quintOut } from 'svelte/easing';
     import { crossfade } from 'svelte/transition';
@@ -64,7 +63,6 @@ const [send, receive] = crossfade({
 		duration: d => Math.sqrt(d * 200),
 
 		fallback(node, params) {
-console.log('f');
 			const style = getComputedStyle(node);
 			const transform = style.transform === 'none' ? '' : style.transform;
 
@@ -84,20 +82,20 @@ console.log('f');
 <table>
   <tr>
     <td></td>
-    <td colspan=4>
-      {array.length} items
+    <td colspan={array.length}>
+      {plural(array.length, "prvek", `${array.length} prvky`, `${array.length} prvků`)}
       <br>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/ThinBraceUp.svg">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/ThinBraceUp.svg" style="width: 90%">
     </td>
   </tr>
 	<tr class="indexes">
-    <td>indexes</td>
+    <td>indexy</td>
 		{#each array as _, i}
 		<td bind:this={tds[i]}>{i}</td>
 		{/each}
 	</tr>
 	<tr>
-    <td>values</td>
+    <td>hodnoty</td>
 		{#each array as value, i (value)}
       <td class="values index-{i}" class:current={i == current} class:processed={i < current} class:highlight={highlight.indexOf(i) > -1}
         in:receive="{{key: value}}" out:send="{{key: value}}" animate:flip
