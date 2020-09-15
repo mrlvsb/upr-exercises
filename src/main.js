@@ -62,6 +62,7 @@ customElements.define('upr-container', class extends HTMLElement {
   `;
   }
 });
+registerAnimation('svgs', require('./svgs.svelte'));
 
 
 registerAnimation('array', require('./array.svelte'));

@@ -36,7 +36,7 @@
   <div style="position: relative" bind:this={svg}>
     <div style="display: flex;">
       <div style="margin-right: 15px;">
-        <Array array={array} current={state.i} highlight={[state.min_index]} />
+        <Array array={array} current={state.i} highlight={{[state.min_index]: 'active'}} />
       </div>
       <div>
       {#if state.i == -1 }
@@ -47,8 +47,8 @@ int min = array[0];
 int min_index = 0;
 </Code>
       </div>
-      {:else if state.i == 3}
-      Našli jsme nové minimum s hodnotou <strong>{state.min}</strong> na indexu <upr-arrow src-anchor="south" dst=".index-3" dst-anchor="south" ctrl-distance="150"><strong>{state.min_index}</strong></upr-arrow>
+      {:else if state.i == state.min_index}
+        Našli jsme nové minimum s hodnotou <strong>{state.min}</strong> na indexu <upr-arrow src-anchor="south" dst=".index-{state.min_index}" dst-anchor="south" ctrl-distance="150"><strong>{state.min_index}</strong></upr-arrow>
       {/if}
       </div>
     </div>

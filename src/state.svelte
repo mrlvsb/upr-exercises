@@ -24,9 +24,9 @@
 
 	let history = [];
   let finished = false;
-	
+
 	function go_next() {
-    let current = JSON.parse(JSON.stringify(state)); 
+    let current = JSON.parse(JSON.stringify(state));
     if(!next()) {
       finished = true;
       return;
@@ -34,7 +34,7 @@
 
     history = [...history, current];
 	}
-	
+
 	function go_prev() {
 		if(!history.length) return;
 		state = history.pop();
@@ -53,7 +53,7 @@
         orient="auto-start-reverse">
         <path d="M 0 0 L 10 5 L 0 10 z" />
       </marker>
-    </defs>    
+    </defs>
   </svg>
 
   <button on:click="{go_prev}" disabled="{!history.length}">❮</button>

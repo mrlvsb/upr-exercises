@@ -34,9 +34,12 @@
 		color: #6c757d;
 		background: transparent;
 	}
-  .highlight {
+  .highlight-active {
     background: #17a2b8;
     color: black;
+  }
+  .highlight-muted {
+    background: #9a9da0;
   }
 
   tr td:first-of-type {
@@ -97,7 +100,7 @@ const [send, receive] = crossfade({
 	<tr>
     <td>hodnoty</td>
 		{#each array as value, i (value)}
-      <td class="values index-{i}" class:current={i == current} class:processed={i < current} class:highlight={highlight.indexOf(i) > -1}
+      <td class="values index-{i} {highlight[i] ? 'highlight-' + highlight[i] : ''}" class:current={i == current} class:processed={i < current}
         in:receive="{{key: value}}" out:send="{{key: value}}" animate:flip
       >{value}</td>
 		{/each}
