@@ -20,7 +20,6 @@ export default {
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
-      preprocess: mdsvex({extension: '.svelte'})
 		}),
 
 		// If you have external dependencies installed from
