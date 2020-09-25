@@ -41,65 +41,77 @@ export default class extends HTMLElement {
     super();
   }
   connectedCallback() {
-    setTimeout(() => {
-      const container = this.closest('.animation') || document;
-      const svg = container.querySelector('svg.overlay');
+    setTimeout(() => this.calculateArrow(), 0);
+  }
 
-      let src = this.getAttribute('src') || this;
-      let dst = this.getAttribute('dst') || this;
-      const src_anchor = this.getAttribute('src-anchor') || 'center';
-      const dst_anchor = this.getAttribute('dst-anchor') || 'center';
-      const ctrl_distance = this.getAttribute('ctrl-distance') || 0;
+  calculateArrow() {
+    const container = this.closest('.animation') || document;
+    const svg = container.querySelector('svg.overlay');
 
-
-      if(typeof dst === 'string' || dst instanceof String) {
-        dst = container.querySelector(dst);
-      }
-      if(typeof src === 'string' || src instanceof String) {
-        src = container.querySelector(src);
-      }
+    let src = this.getAttribute('src') || this;
+    let dst = this.getAttribute('dst') || this;
+    const src_anchor = this.getAttribute('src-anchor') || 'center';
+    const dst_anchor = this.getAttribute('dst-anchor') || 'center';
+    const ctrl_distance = this.getAttribute('ctrl-distance') || 0;
 
 
-      const parent = svg.getBoundingClientRect();
+    if(typeof dst === 'string' || dst instanceof String) {
+      dst = container.querySelector(dst);
+    }
+    if(typeof src === 'string' || src instanceof String) {
+      src = container.querySelector(src);
+    }
 
-      const s = src.getBoundingClientRect();
-      const [p1x, p1y] = moveToAnchor(
-        s.left - parent.left,
-        s.top - parent.top,
-        s.width,
-        s.height,
-        src_anchor
-      );
 
-      const d = dst.getBoundingClientRect();
-      const [p2x, p2y] = moveToAnchor(
-        d.left - parent.left,
-        d.top - parent.top,
-        d.width,
-        d.height,
-        dst_anchor
-      );
+    const parent = svg.getBoundingClientRect();
 
-      const mpx = (p2x + p1x) * 0.5;
-      const mpy = (p2y + p1y) * 0.5;
+    const s = src.getBoundingClientRect();
+    const [p1x, p1y] = moveToAnchor(
+      s.left - parent.left,
+      s.top - parent.top,
+      s.width,
+      s.height,
+      src_anchor
+    );
 
-      // angle of perpendicular to line:
-      const theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
+    const d = dst.getBoundingClientRect();
+    const [p2x, p2y] = moveToAnchor(
+      d.left - parent.left,
+      d.top - parent.top,
+      d.width,
+      d.height,
+      dst_anchor
+    );
 
-      // location of control point:
-      const c1x = mpx + ctrl_distance * Math.cos(theta);
-      const c1y = mpy + ctrl_distance * Math.sin(theta);
+    const mpx = (p2x + p1x) * 0.5;
+    const mpy = (p2y + p1y) * 0.5;
 
-      let instr = `M ${p1x} ${p1y} Q ${c1x} ${c1y} ${p2x} ${p2y}`;
+    // angle of perpendicular to line:
+    const theta = Math.atan2(p2y - p1y, p2x - p1x) - Math.PI / 2;
 
+    // location of control point:
+    const c1x = mpx + ctrl_distance * Math.cos(theta);
+    const c1y = mpy + ctrl_distance * Math.sin(theta);
+
+    let instr = `M ${p1x} ${p1y} Q ${c1x} ${c1y} ${p2x} ${p2y}`;
+
+    if(!this.path) {
       this.path = document.createElementNS("http://www.w3.org/2000/svg", 'path');
-      this.path.setAttribute("d", instr);
-      this.path.setAttribute("stroke", "black");
-      this.path.setAttribute("stroke-width", "2");
-      this.path.setAttribute("fill", "none");
-      this.path.setAttribute("marker-end", "url(#head)");
-      svg.appendChild(this.path);
-    }, 0);
+    }
+    this.path.setAttribute("d", instr);
+    this.path.setAttribute("stroke", "black");
+    this.path.setAttribute("stroke-width", "2");
+    this.path.setAttribute("fill", "none");
+    this.path.setAttribute("marker-end", "url(#head)");
+    svg.appendChild(this.path);
+  }
+
+  static get observedAttributes() {
+    return ['src', 'dst'];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    this.calculateArrow();
   }
 
   disconnectedCallback() {
@@ -107,4 +119,5 @@ export default class extends HTMLElement {
       this.path.remove();
     }
   }
+
 };

@@ -64,7 +64,7 @@
   </slot>
 
   <br>
-  {#each Object.entries(state) as [obj, val]}
+  {#each Object.entries(state).filter(([key, _]) => !key.startsWith('_')) as [obj, val]}
     {obj} = {val}<br>
   {/each}
   <br>

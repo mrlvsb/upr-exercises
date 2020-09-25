@@ -99,7 +99,7 @@ const [send, receive] = crossfade({
 	</tr>
 	<tr>
     <td>hodnoty</td>
-		{#each array as value, i (value)}
+		{#each array as value, i (value,i)}
       <td class="values index-{i} {highlight[i] ? 'highlight-' + highlight[i] : ''}" class:current={i == current} class:processed={i < current}
         in:receive="{{key: value}}" out:send="{{key: value}}" animate:flip
       >{value}</td>

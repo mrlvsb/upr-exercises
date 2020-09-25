@@ -64,11 +64,16 @@ customElements.define('upr-container', class extends HTMLElement {
 });
 registerAnimation('svgs', require('./svgs.svelte'));
 
+registerAnimation('parabola', require('./parabola.svelte'));
+registerAnimation('counting-sort', require('./counting_sort.svelte'));
+
 
 registerAnimation('array', require('./array.svelte'));
 registerAnimation('array-min', require('./min.svelte'));
 registerAnimation('array-reverse', require('./reverse.svelte'));
 registerAnimation('array-sum', require('./sum.svelte'));
+registerAnimation('array-interval', require('./array_interval.svelte'));
+registerAnimation('array-fill', require('./array_fill.svelte'));
 
 registerAnimation('matrix', require('./matrix.svelte'));
 registerAnimation('matrix-mul', require('./matrix_mul.svelte'));
