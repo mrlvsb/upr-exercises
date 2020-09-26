@@ -56,16 +56,18 @@
     </defs>
   </svg>
 
-  <button on:click="{go_prev}" disabled="{!history.length}">❮</button>
-  <button on:click="{go_next}" disabled="{finished}">❯</button>
+  <div style="margin-bottom: 6px;">
+    <button on:click="{go_prev}" disabled="{!history.length}">❮</button>
+    <button on:click="{go_next}" disabled="{finished}">❯</button>
+  </div>
 
   <slot>
   No content
   </slot>
 
-  <br>
+  <div style="font-family: monospace; line-height: normal">
   {#each Object.entries(state).filter(([key, _]) => !key.startsWith('_')) as [obj, val]}
     {obj} = {val}<br>
   {/each}
-  <br>
+  </div>
 </div>

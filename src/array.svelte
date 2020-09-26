@@ -53,10 +53,13 @@
   import { onMount } from 'svelte';
   import { flip } from 'svelte/animate';
   import { plural } from './utils.js';
+  import Bracket from './bracket.svelte';
 
   export let array = [];
-  export let current;
+  export let current = null;
   export let highlight = [];
+  export let showArrow = true;
+  export let key = (val, i) => (val, i);
   let tds = [];
 
   import { quintOut } from 'svelte/easing';
@@ -85,10 +88,11 @@ const [send, receive] = crossfade({
 <table>
   <tr>
     <td></td>
-    <td colspan={array.length}>
-      {plural(array.length, "prvek", `${array.length} prvky`, `${array.length} prvků`)}
-      <br>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/ThinBraceUp.svg" style="width: 90%">
+    <td colspan={array.length} style="white-space: nowrap">
+      {plural(array.length, "1", `${array.length} prvky`, `${array.length} prvků`)}
+      <div style="padding-left: 10px;">
+        <Bracket dir="up" width={30*array.length - 10} />
+      </div>
     </td>
   </tr>
 	<tr class="indexes">
@@ -99,15 +103,17 @@ const [send, receive] = crossfade({
 	</tr>
 	<tr>
     <td>hodnoty</td>
-		{#each array as value, i (value,i)}
-      <td class="values index-{i} {highlight[i] ? 'highlight-' + highlight[i] : ''}" class:current={i == current} class:processed={i < current}
+		{#each array as value, i (key(value, i))}
+      <td width="30" class="values index-{i} {highlight[i] ? 'highlight-' + highlight[i] : ''}" class:current={i == current} class:processed={i < current}
         in:receive="{{key: value}}" out:send="{{key: value}}" animate:flip
       >{value}</td>
 		{/each}
 	</tr>
 </table>
 
+{#if current != null}
 <div class="arrow" style="left: {tds && tds[current] ? (tds[current].offsetLeft - (52-33)/2) : 0}px; opacity: {current >= 0 ? 1 : 0}">
 <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M11 2.206l-6.235 7.528-.765-.645 7.521-9 7.479 9-.764.646-6.236-7.53v21.884h-1v-21.883z"/></svg><br>
 	current
 </div>
+{/if}

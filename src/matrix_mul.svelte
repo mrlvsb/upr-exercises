@@ -27,6 +27,7 @@ function next() {
       state.col = 0;
       state.row++;
       if(state.row >= rows) {
+        state.el = -1;
         return false;
       }
     }
@@ -45,7 +46,7 @@ function next() {
 <State {state} {next} recover={(s) => state = s}>
   <div style="display: flex; align-items: center">
     <Matrix elements={a} highlight={[state.row, state.el]} />
-    <span style="align-self: center; padding: 5px;">x</span>
+    <span style="align-self: center; padding: 5px;">×</span>
     <Matrix elements={b} highlight={[state.el, state.col]} />
     <span style="align-self: center; padding: 5px;">=</span>
     <div class="result">
@@ -53,19 +54,20 @@ function next() {
     </div>
   </div>
 
-{#if state.el >= 0 && state.row < rows}
-  <div style="text-align: center">
-    <upr-arrow dst=".result .matrix-{state.row}-{state.col}" dst-anchor="south" src-anchor="north">
-    {#each {length: state.el + 1} as _, el}
-      {a[state.row][el]} * {b[el][state.col]}
-      {#if el != state.el}
-      +
-      {/if}
-    {/each}
-    = {state._c[state.row][state.col]}
-    </upr-arrow>
+  <div style="text-align: center; font-style: italic;">
+    {#if state.el >= 0 && state.row < rows}
+      <upr-arrow dst=".result .matrix-{state.row}-{state.col}" dst-anchor="south" src-anchor="north">
+      {#each {length: state.el + 1} as _, el}
+        &nbsp; {a[state.row][el]} ⋅ {b[el][state.col]}
+        {#if el != state.el}
+        +
+        {/if}
+      {/each}
+      = {state._c[state.row][state.col]}
+      </upr-arrow>
+    {/if}
+    &nbsp;
   </div>
-{/if}
 </State>
 
 

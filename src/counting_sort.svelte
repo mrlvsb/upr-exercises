@@ -9,7 +9,7 @@
 	let state = {
 		i: -1,
     _printing: false,
-    counters: new Array(max - min + 1).fill(0),
+    _counters: new Array(max - min + 1).fill(0),
     _result: [],
 	};
 
@@ -18,20 +18,20 @@
       if(!state._printing) {
         if(state.i + 1 < array.length) {
           state.i++;
-          state.counters[array[state.i] - min]++;
+          state._counters[array[state.i] - min]++;
         } else {
           state._printing = true;
           state.i = 0;
         }
       } else {
-        if(state.i < state.counters.length) {
-          if(state.counters[state.i]) {
+        if(state.i < state._counters.length) {
+          if(state._counters[state.i]) {
             state._result = [...state._result, state.i + min];
-            state.counters[state.i]--;
+            state._counters[state.i]--;
           } else {
             state.i++;
-            if(state.i >= state.counters.length) {
-              state.i = undefined;
+            if(state.i >= state._counters.length) {
+              state.i = -1;
               return false;
             }
           }
@@ -45,9 +45,9 @@
 
 <State {state} {next} recover={(s) => state = s}>
   <ArrayComp {array} current={!state._printing ? state.i : undefined} />
-  <ArrayComp array={state.counters} current={state._printing ? state.i : undefined} />
+  <ArrayComp array={state._counters} current={state._printing ? state.i : undefined} />
 
   <div>
-    {state._result.join(' ')}
+   {state._result.join(' ')}
   </div>
 </State>

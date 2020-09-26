@@ -11,7 +11,6 @@
 	let state = {
 		i: -1,
 		min: array[0],
-    'array[i]': 0,
     'min_index': 0,
 	};
 

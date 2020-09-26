@@ -1,5 +1,5 @@
 export function plural(count, a, b, c) {
-  if(count == 0) {
+  if(count == 1) {
     return a;
   }
   if(count <= 4) {

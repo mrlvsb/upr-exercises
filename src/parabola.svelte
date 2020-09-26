@@ -1,5 +1,4 @@
 <script>
-  import Code from './Code.svelte';
 	const scale = 20;
 	const max_x = 10;
 
@@ -21,15 +20,19 @@
 	$: {
 		let y0 = 2 * y(0) - y(-max_x)/2 - y(max_x)/2;
 		path = `M${coord(-max_x)} Q0,${scale * y0} ${coord(max_x)}`;
-		const D = b*b - 4 * a * c;
-		roots = [];
-		if(D == 0) {
-			roots.push(-b/(2*a));
-		} else if(D > 0) {
-			roots.push((-b + Math.sqrt(D))/(2*a));
-			roots.push((-b - Math.sqrt(D))/(2*a));
-		}
-    roots = roots;
+    if(a != 0) {
+      const D = b*b - 4 * a * c;
+      roots = [];
+      if(D == 0) {
+        roots.push(-b/(2*a));
+      } else if(D > 0) {
+        roots.push((-b + Math.sqrt(D))/(2*a));
+        roots.push((-b - Math.sqrt(D))/(2*a));
+      }
+      roots = roots;
+    } else {
+      roots = [];
+    }
 	}
 </script>
 
@@ -39,6 +42,10 @@
     border: 0;
     text-align: center;
     background: transparent;
+  }
+
+  button {
+    cursor: pointer;
   }
 </style>
 
@@ -54,13 +61,12 @@
 <span class="hljs-built_in">printf</span>(<span class="hljs-string">"x2 = %f\n"</span>, x2); <span class="hljs-comment">// x2 = {(roots[1] || roots[0] || 0).toFixed(2)}</span>
 </pre>
 
-<svg height="400" viewBox="0 0 400 400" width="400">
+<svg height="400" viewBox="0 0 400 400" width="400" style="display: block; margin: 0 auto">
     <defs>
         <pattern height="20" id="grid" patternUnits="userSpaceOnUse" width="20">
-            <rect fill="white" height="21" stroke="gray" stroke-width="-.5" width="21"></rect>
+            <rect fill="transparent" height="21" stroke="gray" stroke-width="-.5" width="21"></rect>
         </pattern>
     </defs>
-    <rect height="800" width="800" y="0"></rect>
     <rect fill="url(#grid)" height="800" width="800" y="0"></rect>
     <g transform="translate(0,0) scale(1, 1)">
         <line x1="-200" x2="800" y1="200" y2="200" stroke="black"></line>
@@ -70,8 +76,8 @@
     </g>
     <g transform="translate(200, 200) scale(1, -1)">
         <path d={path} fill="none" stroke="black" stroke-width=3></path>
-				{#each roots as x}
-					<circle cx={20*x} cy={y(x)} r=4 />
-				{/each}
+        {#each roots as x}
+          <circle cx={20*x} cy={y(x)} r=5 />
+        {/each}
     </g>
 </svg>
