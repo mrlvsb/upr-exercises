@@ -19,9 +19,9 @@ input {
 
 </style>
 
-<pre style="display: block">
+<pre style="display: block" class="hljs">
 <span class="hljs-keyword">int</span> nums[<input bind:value={len} type="number" min=1 max={max_len} />];
-fill_array(nums, <input bind:value={len} type="number" min=1 max={max_len} />, <span class="hljs-number"><input bind:value={start} type=number></span>, <span class="hljs-number"><input bind:value={increment} type=number></span>);
+<span class="hljs-title">fill_array</span>(nums, <input bind:value={len} type="number" min=1 max={max_len} />, <span class="hljs-number"><input bind:value={start} type=number></span>, <span class="hljs-number"><input bind:value={increment} type=number></span>);
 </pre>
 
 <ArrayComp {array}></ArrayComp>
