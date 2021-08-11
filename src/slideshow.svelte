@@ -1,21 +1,18 @@
 <script>
 export let from = 0;
-export let to;
+export let to = 0;
 export let src;
+export let extension = "svg";
 let current = 0;
 </script>
 
 <style>
   object {
-    position: absolute;
-    opacity: 0;
-    left: 10000;
-    z-index: 10;
+    display: none;
+    height: 100%;
   }
   object.active {
-    opacity: 1;
-    left: 0;
-    top: 0;
+    display: block;
   }
   button {
     border: 0;
@@ -35,13 +32,13 @@ let current = 0;
   }
 </style>
 
-<div>
+<div style="height: 100%;">
   <button on:click={() => current = Math.max(0, current - 1)} disabled={current <= 0}>❮</button>
   <button on:click={() => current = Math.min(to, current + 1)} disabled={current >= to}>❯</button>
 
-  <div style="position: relative">
-  {#each {length: parseInt(to) + 1} as _, num}
-    <object data="{src}{num}.svg" class:active={current == num}></object>
+  <div style="height: 100%;">
+  {#each {length: parseInt(to) - parseInt(from) + 1} as _, num}
+    <object data="{src}{num}.{extension}" class:active={current === num}></object>
   {/each}
   </div>
 </div>

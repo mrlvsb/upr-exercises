@@ -62,7 +62,10 @@ customElements.define('upr-container', class extends HTMLElement {
   `;
   }
 });
-registerAnimation('svgs', require('./svgs.svelte'));
+
+// 'svgs' is kept for backwards compatibility
+registerAnimation('svgs', require('./slideshow.svelte'));
+registerAnimation('slideshow', require('./slideshow.svelte'));
 
 registerAnimation('parabola', require('./parabola.svelte'));
 registerAnimation('counting-sort', require('./counting_sort.svelte'));
