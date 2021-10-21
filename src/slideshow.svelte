@@ -7,11 +7,11 @@ let current = 0;
 </script>
 
 <style>
-  object {
+  img, object {
     display: none;
     height: 100%;
   }
-  object.active {
+  img.active, object.active {
     display: block;
   }
   button {
@@ -38,7 +38,11 @@ let current = 0;
 
   <div style="height: 100%;">
   {#each {length: parseInt(to) - parseInt(from) + 1} as _, num}
-    <object data="{src}{num}.{extension}" class:active={current === num}></object>
+    {#if extension === "svg"}
+      <object data="{src}{num}.{extension}" class:active={current === num}></object>
+    {:else}
+      <img src="{src}{num}.{extension}" class:active={current === num} />
+    {/if}
   {/each}
   </div>
 </div>
